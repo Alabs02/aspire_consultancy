@@ -9,6 +9,7 @@ const Home = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Home'));
 
 // Admin
 const AdminSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Admin/AdminSignIn'));
+const AdminDashboard = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Admin/AdminDashboard'));
 
 // User
 const UserSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../User/UserSignIn'));
@@ -35,7 +36,8 @@ const App = () => {
                 <GuardedRoute path="/" exact component={Home}></GuardedRoute>
                 
                 <GuardedRoute path="/admin/login" exact component={AdminSignIn}></GuardedRoute>
-
+                <GuardedRoute path="/admin/dashboard" exact component={AdminDashboard}></GuardedRoute>
+              
                 
                 <GuardedRoute path="/user/login" exact component={UserSignIn}></GuardedRoute>
                 <GuardedRoute path="/user/register" exact component={UserRegister}></GuardedRoute>

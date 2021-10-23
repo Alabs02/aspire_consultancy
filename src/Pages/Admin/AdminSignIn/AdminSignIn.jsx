@@ -47,19 +47,19 @@ const AdminSignIn = () => {
             <Form>
               <div className="form mt-5 grid grid-cols-12">
 
-                <div className="md:col-span-10 sm:col-span-12 grid mb-4">
+                <div className="md:col-span-10 col-span-12 grid mb-4">
                   <FormLabel htmlFor={`email`} copy={`Email*`} mb={`mb-1`} />
                   <Field name="email" type="email" as={TextField} placeholder="mail@website.com" />
                   <FormikErrorMsg name="email" ref={useRef(null)}/>
                 </div>
 
-                <div className="md:col-span-10 sm:col-span-12 grid mb-4">
+                <div className="md:col-span-10 col-span-12 grid mb-4">
                   <FormLabel htmlFor={`password`} copy={`Password*`} mb={`mb-1`} />
                   <Field name="password" as={PasswordField} placeholder="Min. 8 characters" />
                   <FormikErrorMsg name="password" ref={useRef(null)}/>
                 </div>
 
-                <div className="md:col-span-10 sm:col-span-12 flex justify-between">
+                <div className="md:col-span-10 col-span-12 flex justify-between">
                   <div>
                     <input type="checkbox" className="form-checkbox rounded text-primary" />
                     <span className="ml-2 text-xs font-medium text-brand-black antialiased">Remember me</span>
@@ -67,7 +67,7 @@ const AdminSignIn = () => {
                   <TextBtn title={`Forget password?`} type={"button"} classes={'text-sm font-medium text-primary hover:text-primary-dark'} />
                 </div>
                 
-                <div className="md:col-span-10 sm:col-span-12 mt-5">
+                <div className="md:col-span-10 col-span-12 mt-5 mb-10">
                   {isLoading
                     ? <ThreeDots className="animate__animated animate__pulse" height="2rem" width="4.5rem" fill={'#5037e9'} />
                     : <BlockBtn title={`Go to Dashboard`} type={"submit"} />

@@ -1,0 +1,4 @@
+.search__icon {
+  top: 50%;
+  transform: translateY(-50%);
+}
