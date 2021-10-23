@@ -1,0 +1,4 @@
+.password__field {
+  top: 50%;
+  transform: translateY(-50%);
+}

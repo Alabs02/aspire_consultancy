@@ -3,10 +3,9 @@ import { Formik, Form, Field } from 'formik';
 import { object, string } from 'yup';
 import { AuthLayout } from '../../../Layouts';
 import { TextField, PasswordField } from '../../../Components/FormFields';
+import { BlockBtn, TextBtn } from '../../../Components/AppBtn';
 import FormLabel from '../../../Components/FormLabel';
-import { TextBtn, BlockBtn } from '../../../Components/AppBtn';
 import FormikErrorMsg from '../../../Components/FormikErrorMsg';
-import { isEmpty } from 'lodash';
 
 const initialFormValues = () => {
   return {
@@ -24,13 +23,13 @@ const loginSchema = object().shape({
     .required('Required!'),
 });
 
-const UserSignIn = () => {
+const AdminSignIn = () => {
   return (
     <Fragment>
       <AuthLayout
         ref={useRef(null)}
-        title={`Login`} 
-        copy={`See your growth and get consulting support!`}
+        title={`Admin Login`}
+        copy={`👋 Hello Admin! Welcome Back`}
       >
         <Formik
           initialValues={initialFormValues()}
@@ -42,6 +41,7 @@ const UserSignIn = () => {
           {props => (
             <Form>
               <div className="form mt-5 grid grid-cols-12">
+
                 <div className="md:col-span-10 sm:col-span-12 grid mb-4">
                   <FormLabel htmlFor={`email`} copy={`Email*`} mb={`mb-1`} />
                   <Field name="email" type="email" as={TextField} placeholder="mail@website.com" />
@@ -62,13 +62,8 @@ const UserSignIn = () => {
                   <TextBtn title={`Forget password?`} type={"button"} classes={'text-sm font-medium text-primary hover:text-primary-dark'} />
                 </div>
 
-                <div className="md:col-span-10 sm:col-span-12 mt-5">
-                  <BlockBtn title={`Login`} type={"submit"} />
-                </div>
-
-                <div className="md:col-span-10 sm:col-span-12 flex mt-5 mb-20 items-center">
-                  <p className="m-0 text-xs font-semibold text-brand-black antialiased mr-1">Not registered yet?</p>
-                  <button className="text-xs text-primary hover:text-primary-dark transition-all transform hover:scale-105 hover:ml-2 font-semibold antialiased">Create an Account</button>
+                <div className="md:col-span-10 sm:col-span-12 mt-5 mb-20">
+                  <BlockBtn title={`Go to Dashboard`} type={"submit"} />
                 </div>
 
               </div>
@@ -80,4 +75,4 @@ const UserSignIn = () => {
   );
 }
 
-export default UserSignIn;
+export default AdminSignIn;

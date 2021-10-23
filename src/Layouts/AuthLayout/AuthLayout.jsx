@@ -1,49 +1,36 @@
-import { HiHome } from 'react-icons/hi';
-import { Fragment, forwardRef } from 'react';
-import { Link } from 'react-router-dom';
-import './AuthLayout.css';
+import { forwardRef, Fragment } from "react";
+import PropTypes from 'prop-types';
 
-const AuthLayout = forwardRef(({ children }, ref) => (
+const AuthLayout = forwardRef(({ children, title, copy }, ref) => (
   <Fragment>
-    <div ref={ref} className="bg-primary bg-pattern">
-      <div className="home-btn d-none d-sm-block">
-        <Link to="/">
-          <i className="mdi h2 text-white">
-            <HiHome />  
-          </i>
-        </Link>
-      </div>
+    <div ref={ref} className="min-h-screen min-w-full bg-primary-light grid place-items-center px-14 py-16">
+      <div className="w-full h-full bg-white-pure rounded-sm grid grid-cols-12 overflow-hidden">
 
-      <div className="account-pages my-5 pt-sm-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="text-center mb-5">
-                <a href="index.html" className="logo">
-                  <img src="/assets/images/logo-light.png" height={24} alt="logo" />
-                </a>
-                <h5 className="font-size-16 text-white-50 mb-4">SIMS</h5>
-              </div>
-            </div>
+        <div className="md:col-span-6 sm:col-span-12 w-full h-full bg-white-pure md:px-20 sm:px-10 py-10">
+          <div className="md:w-10 md:h-10 sm:w-8 sm:h-8 overflow-hidden">
+            <img src="/assets/images/logo.png" className="w-full h-full object-contain" alt="logo" />
           </div>
+          <h4 className="font-semibold text-brand-black text-2xl tracking-tight mt-8">{title && title}</h4>
+          <p className="m-0 text-secondary mt-3 text-sm font-medium">{copy && copy}</p>
 
-          <div className="row justify-content-center">
-            <div className="col-xl-5 col-sm-8">
-              <div className="card">
-                <div className="card-body p-4">
-                  <div className="p-2">
-                    {children && children}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {children && children}
+
+          <footer className="text-secondary-light font-normal text-xs">&copy;{new Date().getFullYear()} Aspire Consultancy All rights reserved.</footer>
 
         </div>
-      </div>
 
+        <div className="md:col-span-6 sm:col-span-12 bg-primary">
+        </div>
+
+      </div>
     </div>
   </Fragment>
 ));
+
+AuthLayout.propTypes = {
+  title: PropTypes.string,
+  copy: PropTypes.string,
+  children: PropTypes.node,
+}
 
 export default AuthLayout;

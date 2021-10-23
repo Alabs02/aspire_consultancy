@@ -7,8 +7,12 @@ import 'animate.css';
 // Components
 const Home = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Home'));
 
+// Admin
+const AdminSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Admin/AdminSignIn'));
+
 // User
 const UserSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../User/UserSignIn'));
+const UserRegister = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../User/UserRegister'));
 
 
 const AppRoute = ({ component: Component, layout: Layout, ...properties}) => (
@@ -28,7 +32,12 @@ const App = () => {
             <Suspense fallback={<div className="grid place-items-center">Loading...</div>}>
               <Switch>
                 <GuardedRoute path="/" exact component={Home}></GuardedRoute>
+                
+                <GuardedRoute path="/admin/login" exact component={AdminSignIn}></GuardedRoute>
+
+                
                 <GuardedRoute path="/user/login" exact component={UserSignIn}></GuardedRoute>
+                <GuardedRoute path="/user/register" exact component={UserRegister}></GuardedRoute>
               </Switch>
             </Suspense>
           </CSSTransition>

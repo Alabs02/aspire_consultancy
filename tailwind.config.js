@@ -13,7 +13,10 @@ module.exports = {
           DEFAULT: '#e8e7ee',
           pure: '#ffffff'
         },
-        secondary: '#5b5675',
+        secondary: {
+          DEFAULT: '#5b5675',
+          light: '#9897a1',
+        },
         warning: '#ffc90e',
         'brand-black': '#0a071b'
       }
