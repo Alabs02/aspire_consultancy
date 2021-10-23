@@ -3,31 +3,32 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.2.0",
+    "@tailwindcss/forms": "^0.3.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "@craco/craco": "^6.2.0",
-    "@tailwindcss/forms": "^0.3.3",
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-scripts": "4.0.3",
-    "react-loading-icons": "^1.0.6",
-    "react-router-dom": "^5.2.0",
-    "react-router-guards": "^1.0.2",
-    "react-toastify": "^8.0.2",
-    "react-transition-group": "^4.4.2",
     "formik": "^2.2.9",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-loading-icons": "^1.0.6",
+    "react-router-dom": "^5.2.0",
+    "react-router-guards": "^1.0.2",
+    "react-scripts": "4.0.3",
+    "react-toastify": "^8.0.2",
+    "react-transition-group": "^4.4.2",
     "recoil": "^0.4.0",
     "recoil-persist": "^3.0.0",
+    "skeleton-elements": "^3.5.0",
     "web-vitals": "^1.1.2",
     "wnumb": "^1.2.0",
-    "yup": "^0.32.9"
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "craco start",
@@ -51,8 +52,8 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
-    "postcss": "^7.0.36",
+    "autoprefixer": "^9.8.8",
+    "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
   }
 }

@@ -13,6 +13,7 @@ const AdminSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../A
 // User
 const UserSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../User/UserSignIn'));
 const UserRegister = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../User/UserRegister'));
+const UserDashboard = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../User/UserDashboard'));
 
 
 const AppRoute = ({ component: Component, layout: Layout, ...properties}) => (
@@ -38,6 +39,8 @@ const App = () => {
                 
                 <GuardedRoute path="/user/login" exact component={UserSignIn}></GuardedRoute>
                 <GuardedRoute path="/user/register" exact component={UserRegister}></GuardedRoute>
+                <GuardedRoute path="/user/dashboard" exact component={UserDashboard}></GuardedRoute>
+                
               </Switch>
             </Suspense>
           </CSSTransition>
