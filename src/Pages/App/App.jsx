@@ -28,7 +28,7 @@ const App = () => {
             <Suspense fallback={<div className="grid place-items-center">Loading...</div>}>
               <Switch>
                 <GuardedRoute path="/" exact component={Home}></GuardedRoute>
-                <GuardedRoute path="/user/signin" exact component={UserSignIn}></GuardedRoute>
+                <GuardedRoute path="/user/login" exact component={UserSignIn}></GuardedRoute>
               </Switch>
             </Suspense>
           </CSSTransition>
