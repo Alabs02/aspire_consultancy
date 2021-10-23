@@ -1,9 +1,10 @@
 import { forwardRef, Fragment } from "react";
 import PropTypes from 'prop-types';
+import 'animate.css';
 
 export const BlockBtn = forwardRef(({ title, type }, ref) => (
   <Fragment>
-    <button ref={ref} type={type} className="block w-full antialiased shadow-sm hover:shadow-md text-white py-2.5 text-sm tracking-tight rounded-3xl transition-all bg-primary hover:bg-primary-dark">{title && title}</button>
+    <button ref={ref} type={type} className="block w-full antialiased shadow-sm hover:shadow-md text-white py-2.5 text-sm tracking-tight rounded-3xl transition-all bg-primary hover:bg-primary-dark animate__animated animate__pulse">{title && title}</button>
   </Fragment>
 ));
 

@@ -1,4 +1,4 @@
-import { Fragment, useRef } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { object, string } from 'yup';
 import { AuthLayout } from '../../../Layouts';
@@ -6,6 +6,8 @@ import { TextField, PasswordField } from '../../../Components/FormFields';
 import { BlockBtn, TextBtn } from '../../../Components/AppBtn';
 import FormLabel from '../../../Components/FormLabel';
 import FormikErrorMsg from '../../../Components/FormikErrorMsg';
+import { ThreeDots } from 'react-loading-icons';
+import 'animate.css';
 
 const initialFormValues = () => {
   return {
@@ -24,6 +26,9 @@ const loginSchema = object().shape({
 });
 
 const AdminSignIn = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Fragment>
       <AuthLayout
@@ -61,9 +66,12 @@ const AdminSignIn = () => {
                   </div>
                   <TextBtn title={`Forget password?`} type={"button"} classes={'text-sm font-medium text-primary hover:text-primary-dark'} />
                 </div>
-
-                <div className="md:col-span-10 sm:col-span-12 mt-5 mb-20">
-                  <BlockBtn title={`Go to Dashboard`} type={"submit"} />
+                
+                <div className="md:col-span-10 sm:col-span-12 mt-5">
+                  {isLoading
+                    ? <ThreeDots className="animate__animated animate__pulse" height="2rem" width="4.5rem" fill={'#5037e9'} />
+                    : <BlockBtn title={`Go to Dashboard`} type={"submit"} />
+                  }
                 </div>
 
               </div>

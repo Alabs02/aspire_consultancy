@@ -1,4 +1,4 @@
-import { Fragment, useRef } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { object, string } from 'yup';
 import { AuthLayout } from '../../../Layouts';
@@ -7,6 +7,8 @@ import FormLabel from '../../../Components/FormLabel';
 import { TextBtn, BlockBtn } from '../../../Components/AppBtn';
 import FormikErrorMsg from '../../../Components/FormikErrorMsg';
 import { isEmpty } from 'lodash';
+import { ThreeDots } from 'react-loading-icons';
+import 'animate.css';
 
 const initialFormValues = () => {
   return {
@@ -25,6 +27,9 @@ const loginSchema = object().shape({
 });
 
 const UserSignIn = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Fragment>
       <AuthLayout
@@ -63,7 +68,10 @@ const UserSignIn = () => {
                 </div>
 
                 <div className="md:col-span-10 sm:col-span-12 mt-5">
-                  <BlockBtn title={`Login`} type={"submit"} />
+                  {isLoading
+                    ? <ThreeDots className="animate__animated animate__pulse" height="2rem" width="4.5rem" fill={'#5037e9'} />
+                    : <BlockBtn title={`Login`} type={"submit"} />
+                  }
                 </div>
 
                 <div className="md:col-span-10 sm:col-span-12 flex mt-5 mb-20 items-center">
