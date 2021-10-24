@@ -6,8 +6,14 @@ import { TextField, PasswordField } from '../../../Components/FormFields';
 import FormLabel from '../../../Components/FormLabel';
 import { TextBtn, BlockBtn } from '../../../Components/AppBtn';
 import FormikErrorMsg from '../../../Components/FormikErrorMsg';
-import { isEmpty } from 'lodash';
+import _, { isEmpty } from 'lodash';
 import { ThreeDots } from 'react-loading-icons';
+import { toFormData, catchAxiosErrors, postRequest, slugify } from '../../../Utils';
+import { localForage } from '../../../Services';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { userAtom } from '../../../Store/user';
 import 'animate.css';
 
 const initialFormValues = () => {
@@ -28,7 +34,9 @@ const loginSchema = object().shape({
 
 const UserSignIn = () => {
 
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useRecoilState(userAtom);
 
   return (
     <Fragment>
@@ -41,7 +49,41 @@ const UserSignIn = () => {
           initialValues={initialFormValues()}
           validationSchema={loginSchema}
           onSubmit={async (values, { resetForm }) => {
-            console.log(values);
+            try {
+              setIsLoading(true);
+              const { data, status, statusText } = await postRequest('/user/login', toFormData(values));
+
+              if (data) {
+                console.log(data, status, statusText);
+                console.log('Signin State', user);
+                setUser(_.get(data, 'data.user', {}));
+
+                const forageData = {
+                  access_token: data?.data?.access_token,
+                  isLoggedIn: true,
+                  user_type: data?.data?.user_type,
+                  token_type: data?.data?.token_type
+                }
+
+                localForage.setItem('userCredentials', forageData).then(() => localForage.getItem('userCredentials'))
+                  .then((val) => {
+                    console.log('Credentials', val)
+                    console.log('In localforage')
+                    console.log('new state:', user)
+                  }).catch((err) => console.error(err));
+
+                toast.success(`Hey ${_.split(_.get(data, 'data.user.name', null), ' ', 1)}, Welcome Back!`);
+                setIsLoading(false);
+                if(_.get(data?.data, 'user_type', null) === "user") {
+                  setTimeout(() => {
+                    resetForm();
+                    history.push(`/${slugify(_.get(data, 'data.user.name', null))}/dashboard`);
+                  }, 4000);
+                }
+              }
+            } catch(err) {
+              catchAxiosErrors(err, setIsLoading, null);
+            }
           }}
         >
           {props => (
@@ -67,7 +109,7 @@ const UserSignIn = () => {
                   <TextBtn title={`Forget password?`} type={"button"} classes={'text-sm font-medium text-primary hover:text-primary-dark'} />
                 </div>
 
-                <div className="md:col-span-10 col-span-12 mt-5">
+                <div className="md:col-span-10 col-span-12 mt-5 grid place-items-center w-full">
                   {isLoading
                     ? <ThreeDots className="animate__animated animate__pulse" height="2rem" width="4.5rem" fill={'#5037e9'} />
                     : <BlockBtn title={`Login`} type={"submit"} />

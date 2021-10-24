@@ -12,8 +12,8 @@ render(
     <RecoilRoot>
       <ToastContainer
         position={'top-right'}
-        autoClose={5000}
-        hideProgressBar={false}
+        autoClose={4000}
+        hideProgressBar={true}
         newestOnTop={false}
         closeOnClick
         rtl={false}

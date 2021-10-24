@@ -7,6 +7,13 @@ import { BlockBtn, TextBtn } from '../../../Components/AppBtn';
 import FormLabel from '../../../Components/FormLabel';
 import FormikErrorMsg from '../../../Components/FormikErrorMsg';
 import { ThreeDots } from 'react-loading-icons';
+import { catchAxiosErrors, postRequest, toFormData, slugify } from '../../../Utils';
+import { localForage } from '../../../Services';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
+import { useRecoilState } from 'recoil';
+import { adminAtom } from '../../../Store/admin';
+import _, { isEmpty } from 'lodash';
 import 'animate.css';
 
 const initialFormValues = () => {
@@ -27,7 +34,9 @@ const loginSchema = object().shape({
 
 const AdminSignIn = () => {
 
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
+  const [admin, setAdmin] = useRecoilState(adminAtom);
 
   return (
     <Fragment>
@@ -40,7 +49,42 @@ const AdminSignIn = () => {
           initialValues={initialFormValues()}
           validationSchema={loginSchema}
           onSubmit={async (values, { resetForm }) => {
-            console.log(values);
+            try {
+              console.log(values);
+              setIsLoading(true);
+              const { data, status, statusText } = await postRequest('/admin/login', toFormData(values));
+
+              if (data) {
+                console.log(data, status, statusText);
+                console.log('Signin State', admin);
+                setAdmin(_.get(data, 'data.admin', {}));
+
+                const forageData = {
+                  access_token: _.get(data, 'data.access_token', null),
+                  isLoggedIn: true,
+                  user_type: _.get(data, 'data.user_type', null),
+                  token_type: _.get(data, 'data.token_type', null),
+                }
+
+                localForage.setItem('userCredentials', forageData).then(() => localForage.getItem('userCredentials'))
+                  .then((val) => {
+                    console.log('Credentials', val)
+                    console.log('In localforage')
+                    console.log('new state:', admin)
+                  }).catch((err) => console.error(err));
+
+                toast.success(`Hey ${_.split(_.get(data, 'data.admin.name', null), ' ', 1)}, Welcome Back!`);
+                setIsLoading(false);
+                if(_.get(data?.data, 'user_type', null) === "admin") {
+                  setTimeout(() => {
+                    resetForm();
+                    history.push(`/${slugify(_.get(data?.data, 'admin.name', null))}/dashboard`);
+                  }, 4000);
+                }
+              }
+            } catch(err) {
+              catchAxiosErrors(err, setIsLoading, null);
+            }
           }}
         >
           {props => (
@@ -67,7 +111,7 @@ const AdminSignIn = () => {
                   <TextBtn title={`Forget password?`} type={"button"} classes={'text-sm font-medium text-primary hover:text-primary-dark'} />
                 </div>
                 
-                <div className="md:col-span-10 col-span-12 mt-5 mb-10">
+                <div className="md:col-span-10 col-span-12 mt-5 mb-10 grid place-items-center w-100">
                   {isLoading
                     ? <ThreeDots className="animate__animated animate__pulse" height="2rem" width="4.5rem" fill={'#5037e9'} />
                     : <BlockBtn title={`Go to Dashboard`} type={"submit"} />

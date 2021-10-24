@@ -36,13 +36,11 @@ const App = () => {
                 <GuardedRoute path="/" exact component={Home}></GuardedRoute>
                 
                 <GuardedRoute path="/admin/login" exact component={AdminSignIn}></GuardedRoute>
-                <GuardedRoute path="/admin/dashboard" exact component={AdminDashboard}></GuardedRoute>
-              
+                <GuardedRoute path="/:adminSlug/dashboard" exact component={AdminDashboard}></GuardedRoute>
                 
                 <GuardedRoute path="/user/login" exact component={UserSignIn}></GuardedRoute>
                 <GuardedRoute path="/user/register" exact component={UserRegister}></GuardedRoute>
-                <GuardedRoute path="/user/dashboard" exact component={UserDashboard}></GuardedRoute>
-                
+                <GuardedRoute path="/:userSlug/dashboard" exact component={UserDashboard}></GuardedRoute>
               </Switch>
             </Suspense>
           </CSSTransition>
