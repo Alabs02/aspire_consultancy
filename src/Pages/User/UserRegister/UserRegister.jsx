@@ -91,7 +91,7 @@ const UserRegister = () => {
                 if(_.get(data?.data, 'user_type', null) === "user") {
                   setTimeout(() => {
                     resetForm();
-                    history.push(`/${slugify(_.get(data, 'data.user.name', null))}/dashboard`);
+                    history.push(`/user/${slugify(_.get(data, 'data.user.name', null))}/dashboard`);
                   }, 4000);
                 }
               }

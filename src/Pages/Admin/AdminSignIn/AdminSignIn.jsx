@@ -78,7 +78,7 @@ const AdminSignIn = () => {
                 if(_.get(data?.data, 'user_type', null) === "admin") {
                   setTimeout(() => {
                     resetForm();
-                    history.push(`/${slugify(_.get(data?.data, 'admin.name', null))}/dashboard`);
+                    history.push(`/admin/${slugify(_.get(data?.data, 'admin.name', null))}/dashboard`);
                   }, 4000);
                 }
               }
