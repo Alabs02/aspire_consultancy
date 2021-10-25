@@ -6,6 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { ToastContainer } from 'react-toastify';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { getToken } from './Utils';
+
+console.log('Token:', getToken());
 
 render(
   <StrictMode>

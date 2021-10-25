@@ -5,7 +5,7 @@ import { getToken } from "../Utils";
 import localForage from "./localForage";
 // import clearRecoil from '../recoil/clearRecoil';
 
-const logoutEntity = async (endpoint, router) => {
+const logoutEntity = async (endpoint, router, redirect) => {
   try {
     const { data, status, statusText } = await postRequest(endpoint, null, {
       headers: {
@@ -18,7 +18,7 @@ const logoutEntity = async (endpoint, router) => {
       localForage.clear().then(() => {
         // clearRecoil();
         toast.success(`You've logged out successfully!`);
-        router.push('/');
+        router.push(redirect);
         console.log('Database is now empty.');
       }).catch((e) => {
         console.error(e)
