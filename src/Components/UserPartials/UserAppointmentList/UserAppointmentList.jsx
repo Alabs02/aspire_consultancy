@@ -66,8 +66,6 @@ const UserAppointmentList = () => {
               copy={`Appointments will appear once you book using the yellow button!`}
             />
         }
-        
-        
       </div>
     </Fragment>
   );

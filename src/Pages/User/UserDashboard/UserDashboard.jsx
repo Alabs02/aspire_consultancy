@@ -89,7 +89,7 @@ const UserDashboard = () => {
 
                             if (data) {
                               console.log(data, status, statusText);
-                              setUserAppointments(data?.data?.appointment);
+                              setUserAppointments(items => [...items, data?.data?.appointment]);
                               setIsLoading(false);
                               setIsOpen(false);
                               toast.success(`Appointment booked succesfully!`);
@@ -104,13 +104,13 @@ const UserDashboard = () => {
                           <Form>
                             <div className="grid grid-cols-12">
 
-                            <div className="col-span-12 grid mb-4">
-                              <FormLabel htmlFor={`company_name`} copy={`Company Name(Optional)`} mb={'mb-1'} />
-                              <Field name="company_name" type="text" as={TextField} placeholder="e.g Alphabet" />
-                              <ErrorMessage name="company_name">
-                                {msg => <div className="text-left text-red-500 font-medium text-sm">{msg}</div>}
-                              </ErrorMessage>
-                            </div>
+                              <div className="col-span-12 grid mb-4">
+                                <FormLabel htmlFor={`company_name`} copy={`Company Name(Optional)`} mb={'mb-1'} />
+                                <Field name="company_name" type="text" as={TextField} placeholder="e.g Alphabet" />
+                                <ErrorMessage name="company_name">
+                                  {msg => <div className="text-left text-red-500 font-medium text-sm">{msg}</div>}
+                                </ErrorMessage>
+                              </div>
 
                               <div className="col-span-12 grid mb-4">
                                 <FormLabel htmlFor={`subject`} copy={`Appointment Subject*`} mb={'mb-1'} />

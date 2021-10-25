@@ -150,7 +150,7 @@ const UserRegister = () => {
 
                 <div className="md:col-span-10 col-span-12 flex mt-5 mb-8 items-center">
                   <p className="m-0 text-xs font-semibold text-brand-black antialiased mr-1">Already have an Account?</p>
-                  <button className="text-xs text-primary hover:text-primary-dark transition-all transform hover:scale-105 hover:ml-2 font-semibold antialiased">Sign in</button>
+                  <button type="button" onClick={() => history.push('/user/login')} className="text-xs text-primary hover:text-primary-dark transition-all transform hover:scale-105 hover:ml-2 font-semibold antialiased">Sign in</button>
                 </div>
               </div>
             </Form>

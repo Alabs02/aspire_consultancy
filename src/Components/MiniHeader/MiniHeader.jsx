@@ -18,7 +18,8 @@ const MiniHeader = () => {
 
   const history = useHistory();
   const userProfile = useRecoilValue(withUser);
-  const [isVisible, setIsVisible] = useState(false); 
+  const [isVisible, setIsVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Fragment>
@@ -28,25 +29,25 @@ const MiniHeader = () => {
           <input type="text" className="form-input w-full rounded-3xl px-10 py-3 font-normal text-sm text-secondary-light shadow-sm border-1 border-white focus:border-primary" placeholder="Search" />
         </div>
         <div className="flex md:hidden group relative">
-          <HiMenuAlt2 className="text-brand-black overflow-hidden hover:text-primary transition-colors cursor-pointer" size={35} />
+          <HiMenuAlt2 onClick={() => setIsOpen(!isOpen)} className="text-brand-black overflow-hidden hover:text-primary transition-colors cursor-pointer" size={35} />
 
-          <nav tabIndex="0" className="absolute transition-all w-60 top-full left-0 border-2 transform translate-x-1 rounded-lg border-gray-300 bg-white-pure grid grid-cols-12 invisible group-hover:visible opacity-0 group-hover:opacity-100">
+          {isOpen ? <nav tabIndex="0" className="absolute transition-all w-60 top-full left-0 border-2 transform translate-x-1 rounded-lg border-gray-300 bg-white-pure grid grid-cols-12">
             <ul className="col-span-12 w-full flex flex-col">
               <li className="hover:bg-white py-2 px-4">
-                <NavLink to={`/user/${slugify(_.get())}/dashboard`} activeClassName="active__navlink" className="text-brand-black flex items-center">
+                <NavLink to={`/admin/${slugify(_.get())}/dashboard`} activeClassName="active__navlink" className="text-brand-black flex items-center">
                   <MdSpaceDashboard className="mr-2" size={18} />
                   Dashboard
                 </NavLink>
               </li>
 
               <li className="hover:bg-white py-2 px-4">
-                <NavLink to={`/user/${slugify(_.get())}/profile`} activeClassName="active__navlink" className="text-brand-black flex items-center">
+                <NavLink to={`/admin/${slugify(_.get())}/profile`} activeClassName="active__navlink" className="text-brand-black flex items-center">
                   <BsFillPersonFill className="mr-2" size={18} />
                   Profile
                 </NavLink>
               </li>
             </ul>
-          </nav>
+          </nav> : ``}
         </div>
 
         <div className="flex items-center">

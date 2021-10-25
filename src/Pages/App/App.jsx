@@ -6,6 +6,7 @@ import 'animate.css';
 
 // Components
 const Home = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Home'));
+const Error = lazy(() => import(/* webpackChunkName: "Pages.Error" */ '../Error'));
 
 // Admin
 const AdminSignIn = lazy(() => import(/* webpackChunkName: "Pages.Auth" */ '../Admin/AdminSignIn'));
@@ -28,7 +29,7 @@ const AppRoute = ({ component: Component, layout: Layout, ...properties}) => (
 const App = () => {
   return (
     <Router>
-      <GuardProvider guards={[]} error={<div>ErrorPage</div>}>
+      <GuardProvider guards={[]} error={<Error />}>
         <TransitionGroup>
           <CSSTransition classNames="animate__animated animate__fadeInLeft" timeout={100}>
             <Suspense fallback={<div className="grid place-items-center">Loading...</div>}>
@@ -36,11 +37,12 @@ const App = () => {
                 <GuardedRoute path="/" exact component={Home}></GuardedRoute>
                 
                 <GuardedRoute path="/admin/login" exact component={AdminSignIn}></GuardedRoute>
-                <GuardedRoute path="admin/:adminSlug/dashboard" exact component={AdminDashboard}></GuardedRoute>
+                <GuardedRoute path="/admin/:adminSlug/dashboard" exact component={AdminDashboard}></GuardedRoute>
                 
                 <GuardedRoute path="/user/login" exact component={UserSignIn}></GuardedRoute>
                 <GuardedRoute path="/user/register" exact component={UserRegister}></GuardedRoute>
                 <GuardedRoute path="/user/:userSlug/dashboard" exact component={UserDashboard}></GuardedRoute>
+                <GuardedRoute path="*" exact component={Error}></GuardedRoute>
               </Switch>
             </Suspense>
           </CSSTransition>

@@ -8,9 +8,11 @@ module.exports = {
           light: '#dcdfff',
           DEFAULT: '#5037e9',
           dark: '#3521b5',
+          black: '#09003d',
         },
         white: {
           DEFAULT: '#e8e7ee',
+          dark: '#e0dcfc',
           pure: '#ffffff'
         },
         secondary: {

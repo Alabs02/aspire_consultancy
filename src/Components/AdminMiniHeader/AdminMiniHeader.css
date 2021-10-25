@@ -2,3 +2,7 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+.active__navlink {
+  color: #3521b5 !important;
+}

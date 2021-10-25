@@ -1,0 +1,17 @@
+.error__btn {
+  margin-top: -23%;
+}
+
+.error__heading {
+  margin-bottom: -25%;
+}
+
+@media screen and (max-width: 780px) {
+  .error__btn {
+    margin-top: -30rem;
+  }
+
+  .error__heading {
+    margin-bottom: -25rem;
+  }
+}

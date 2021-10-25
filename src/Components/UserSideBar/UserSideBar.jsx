@@ -26,7 +26,7 @@ const UserSideBar = () => {
 
           <ul className="w-full mt-5">
             <li className="mb-3 group">
-              <NavLink 
+              <NavLink
                 exact
                 to={`/user/${slugify(get(userProfile, 'name', null))}/dashboard`}
                 activeClassName="active__link"
